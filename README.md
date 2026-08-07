@@ -13,7 +13,7 @@ Industry surveys report that a majority of registered investment advisers (RIAs)
 - **Disclosed AI use is low and steeply stratified:** 23.7% of brochures (95% CI 19.7–28.2) disclose any use, rising from about 9% among the smallest advisers to 30% (wealth/retail) and 56% (private-fund) among the largest; trend and adviser-type effects are both significant (logistic regression, p < 0.001).
 - **A survey-weighted estimate** reweighting the strata to the brochure-filing population is 22.7% (95% CI 18.7–26.6), close to the design estimate.
 - **The dominant disclosure mode is a risk warning** (27.6%), not a claim of use.
-- **Independent cross-family validation** (180 blinded brochures re-coded by a different model family) gives any-use κ = 0.65 (precision 0.76, recall 0.88); the risk-factor label reaches κ = 0.89.
+- **Independent cross-family validation** (180 blinded brochures re-coded by a different model family, metrics design-weighted to the population via two-phase verification sampling) gives any-use κ = 0.74 (precision 0.76, recall 0.84); the risk-factor label reaches κ = 0.93.
 - **Potential AI-washing exposure is rare** in brochures (5 of 388, 1.3%; none an unsubstantiated promotional claim of the charged type on adjudication) and no larger in current marketing; firms disclose AI use more in the lawyered brochure (23.0%) than on their websites (5.7%).
 
 This repository is the frozen dataset and deterministic analysis pipeline that regenerates those numerical results, tables, and figures.
@@ -25,10 +25,12 @@ This repository is the frozen dataset and deterministic analysis pipeline that r
 | Field | Value |
 |-------|--------|
 | **Article title** | Disclosed Intelligence: A Large-Sample Measurement of AI Disclosure in U.S. Investment Adviser Fiduciary Filings |
-| **Author** | Samir Chincholikar |
-| **Affiliation** | Independent researcher |
-| **Persistent DOI** | _to be assigned on Code Ocean publication_ |
-| **Contact** | samir.chincholikar@gmail.com |
+| **Authors** | Samir Chincholikar; Robin Chawla (corresponding) |
+| **Affiliation** | Independent Researcher |
+| **Code repository** | https://github.com/samirrc2/disclosed-intelligence |
+| **Persistent DOI** | Code Ocean and Zenodo DOIs to be assigned on deposit (see below) |
+| **Contact** | Robin Chawla: robin.chawla.cse14@iitbhu.ac.in; Samir Chincholikar: samir.chincholikar@gmail.com |
+| **ORCID** | Samir Chincholikar: 0009-0007-2779-3492; Robin Chawla: 0009-0007-2807-3948 |
 
 ### Role of the artifact
 
@@ -63,7 +65,7 @@ Expected headline output (`results/latest/metrics_summary.md`):
 ```
 Disclosed any-use (design): 23.7% (95% CI 19.7-28.2); n=388
 Survey-weighted any-use (brochure-filing): 22.7% (95% CI 18.7-26.6)
-Independent cross-family validation (n=180): any-use κ=0.645, precision 0.761, recall 0.875
+Independent cross-family validation (n=180, design-weighted): any-use κ=0.738, precision 0.761, recall 0.837
 AI-washing exposure screen: 5/388 brochures (1.3%)
 Venue comparison (n=283): brochure 23.0% vs marketing 5.7%
 ```
@@ -104,6 +106,15 @@ Venue comparison (n=283): brochure 23.0% vs marketing 5.7%
 
 ---
 
-## 5. License
+## 5. Citation and archival deposits
+
+This artifact is deposited in two places for permanence and independent execution:
+
+- **Code Ocean** — a compute capsule that runs the Reproducible Run (`/code/run`) in the pinned environment (`environment/Dockerfile`). DOI to be minted on publication.
+- **Zenodo** — a long-term archival snapshot of this repository, minted from a tagged GitHub release (`CITATION.cff` and `.zenodo.json` supply the metadata automatically). DOI to be minted on release.
+
+Once minted, add both DOIs here and in the article's Data Availability statement. To cite, use `CITATION.cff` (GitHub renders a "Cite this repository" button from it) or the article itself.
+
+## 6. License
 
 Code and documentation are released under the MIT License (`LICENSE`). The frozen data are derived from public SEC filings.

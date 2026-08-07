@@ -150,27 +150,55 @@ def _code_dicts(primary_df, other_df):
     return md, od
 
 
+def _wconf(md, hd, w, keys, L):
+    """Design-weighted 2x2 counts for label L over the two-phase validation sample."""
+    tp = fp = fn = tn = 0.0
+    for k in keys:
+        m, h, wt = md[k][L], hd[k][L], w[k]
+        if m and h: tp += wt
+        elif m and not h: fp += wt
+        elif not m and h: fn += wt
+        else: tn += wt
+    return tp, fp, fn, tn
+
+
 def t4_validation(d, out):
     md, hd = _code_dicts(d["primary"], d["independent"])
-    n = len(md)
+    keys = list(md.keys())
+    n = len(keys)
+    # Two-phase (verification) sampling weights. Model-positive brochures (any label a-e, i.e.
+    # any mention) are a census (inclusion probability 1); model-negatives are sampled, so each
+    # carries weight (population model-negatives)/(sampled model-negatives). Weights are derived
+    # from the data, not hard-coded, so the metrics apply to the full classified population.
+    prim = d["primary"].set_index("fid")
+    mention_all = (prim[list("abcde")].sum(axis=1) > 0)
+    n_neg_pop = int((~mention_all).sum())
+    ment = {k: int(mention_all.loc[k]) for k in keys}
+    n_neg_sampled = sum(1 for k in keys if ment[k] == 0)
+    wneg = n_neg_pop / n_neg_sampled if n_neg_sampled else 1.0
+    w = {k: (1.0 if ment[k] == 1 else wneg) for k in keys}
+
     names = {"a": "investment process", "b": "operations", "c": "risk factor",
              "d": "explicit non-use", "e": "named vendor"}
     rows = []
     for L in "abcde":
-        tp, fp, fn, tn = confusion(md, hd, L)
-        prec, rec, f1 = prf(tp, fp, fn)
-        k, pk = kappa_pabak(tp, fp, fn, tn)
-        agr = (tp + tn) / n
+        tp, fp, fn, tn = confusion(md, hd, L)                 # observed (unweighted) counts
+        wtp, wfp, wfn, wtn = _wconf(md, hd, w, keys, L)       # design-weighted
+        prec, rec, f1 = prf(wtp, wfp, wfn)
+        k, pk = kappa_pabak(wtp, wfp, wfn, wtn)
+        agr = (wtp + wtn) / (wtp + wfp + wfn + wtn)
         rows.append([f"({L}) {names[L]}", tp + fp, tp + fn, tp, fp, fn, tn,
                      round(prec, 3), round(rec, 3), round(f1, 3), round(agr, 3), round(k, 3), round(pk, 3)])
     # any-use derived
-    mu = {k: {"x": 1 if (md[k]["a"] or md[k]["b"] or md[k]["e"]) else 0} for k in md}
-    hu = {k: {"x": 1 if (hd[k]["a"] or hd[k]["b"] or hd[k]["e"]) else 0} for k in hd}
+    mu = {k: {"x": 1 if (md[k]["a"] or md[k]["b"] or md[k]["e"]) else 0} for k in keys}
+    hu = {k: {"x": 1 if (hd[k]["a"] or hd[k]["b"] or hd[k]["e"]) else 0} for k in keys}
     tp, fp, fn, tn = confusion(mu, hu, "x")
-    prec, rec, f1 = prf(tp, fp, fn)
-    k, pk = kappa_pabak(tp, fp, fn, tn)
+    wtp, wfp, wfn, wtn = _wconf(mu, hu, w, keys, "x")
+    prec, rec, f1 = prf(wtp, wfp, wfn)
+    k, pk = kappa_pabak(wtp, wfp, wfn, wtn)
     rows.append(["Any use (a OR b OR e)", tp + fp, tp + fn, tp, fp, fn, tn,
-                 round(prec, 3), round(rec, 3), round(f1, 3), round((tp + tn) / n, 3), round(k, 3), round(pk, 3)])
+                 round(prec, 3), round(rec, 3), round(f1, 3),
+                 round((wtp + wtn) / (wtp + wfp + wfn + wtn), 3), round(k, 3), round(pk, 3)])
     cols = ["label", "model_pos", "indep_pos", "tp", "fp", "fn", "tn",
             "precision", "recall", "f1", "pct_agree", "kappa", "pabak"]
     tab = pd.DataFrame(rows, columns=cols)
@@ -313,10 +341,11 @@ def write_summary(out, t1, t2res, t3res, t4, t4b, nval, t5, exp, miss):
              f"logit AUM-quartile coef {lg['aumq']['coef']} (SE {lg['aumq']['se']}), "
              f"private-fund coef {lg['pf']['coef']} (SE {lg['pf']['se']}), both p<0.001.")
     anyrow = t4[t4.label.str.startswith("Any use")].iloc[0]
-    L.append(f"- **Independent cross-family validation (n={nval}):** any-use κ={anyrow.kappa}, "
-             f"precision {anyrow.precision}, recall {anyrow.recall}; risk-factor κ="
+    L.append(f"- **Independent cross-family validation (n={nval}, design-weighted to the population):** "
+             f"any-use κ={anyrow.kappa}, precision {anyrow.precision}, recall {anyrow.recall}; risk-factor κ="
              f"{t4[t4.label.str.startswith('(c)')].iloc[0].kappa}, named-vendor recall "
-             f"{t4[t4.label.str.startswith('(e)')].iloc[0].recall}.")
+             f"{t4[t4.label.str.startswith('(e)')].iloc[0].recall}. Metrics use two-phase verification weights "
+             f"(model-positives censused; model-negatives up-weighted); precision is invariant to the weighting.")
     L.append(f"- **AI-washing exposure screen:** {exp['brochure_exposed_k']}/{exp['brochure_n']} "
              f"brochures ({exp['brochure_exposed_share']*100:.1f}%) match charged-conduct language.")
     L.append(f"- **Venue comparison (n={t5['n_firms_both_venues']} matched):** brochure any-use "
