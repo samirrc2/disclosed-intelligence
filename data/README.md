@@ -1,5 +1,11 @@
 # Data (`/data` mount)
 
+Companion data package for the Frontiers in Artificial Intelligence manuscript
+*Disclosed Intelligence: A Large-Sample Measurement of AI Disclosure in U.S.
+Investment Adviser Fiduciary Filings*. See the repository root `README.md` for the
+full Data Availability statement. Executable Code Ocean capsule:
+https://doi.org/10.24433/CO.3404788.v1.
+
 All files are **frozen intermediate artifacts**. The expensive, networked upstream
 steps — downloading SEC Form ADV bulk data, retrieving each brochure from IAPD, and
 classifying brochures with a large language model — are **not** re-run here. Their

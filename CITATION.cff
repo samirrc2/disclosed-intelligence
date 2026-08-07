@@ -15,6 +15,11 @@ authors:
     given-names: Robin
     orcid: "https://orcid.org/0009-0007-2807-3948"
 repository-code: "https://github.com/samirrc2/disclosed-intelligence"
+identifiers:
+  - type: doi
+    value: "10.24433/CO.3404788.v1"
+    description: "Code Ocean compute capsule"
+url: "https://doi.org/10.24433/CO.3404788.v1"
 license: MIT
 keywords:
   - artificial intelligence

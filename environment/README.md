@@ -2,9 +2,12 @@
 
 ## Code Ocean
 
-`Dockerfile` pins the exact analysis stack (Python 3.11 + `numpy==2.2.6`,
-`pandas==2.2.3`, `scipy==1.14.1`, `statsmodels==0.14.4`, `matplotlib==3.9.2`).
-Reproduction needs **no API keys and no network**.
+Capsule DOI: https://doi.org/10.24433/CO.3404788.v1
+
+`Dockerfile` uses Code Ocean `py-r` (Python 3.12.8) and pins
+`numpy==2.2.6`, `pandas==2.2.3`, `scipy==1.14.1`, `statsmodels==0.14.4`,
+`matplotlib==3.9.2`, `pytest==8.3.3`. Reproduction needs **no API keys and
+no network**.
 
 Capsule mounts:
 
@@ -15,7 +18,9 @@ Capsule mounts:
 | `/results` | analysis outputs (tables, figures, `metrics_summary.md`) |
 
 Default Reproducible Run: `/code/run` → `bash code/scripts/reproduce.sh`
-(analyze the frozen data, then a byte-identical replication check).
+(analyze the frozen data, then a SHA-256 byte-identical replication check).
+Expect `/results/metrics_summary.md` and **PASS** in
+`/results/latest/replication_check.md`.
 
 ## Local development
 

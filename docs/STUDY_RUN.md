@@ -10,9 +10,12 @@ bash reproduce.sh --analyze-only
 bash reproduce.sh --test       # unit tests only
 ```
 
-Outputs: `results/latest/` locally, `/results` on Code Ocean —
-`metrics_summary.md` (verdict first), `tables/*.csv`, `figures/*.{png,svg}`,
-`replication_check.md`.
+Outputs:
+
+- Local: `results/latest/` — `metrics_summary.md`, `tables/`, `figures/`,
+  `replication_check.md`
+- Code Ocean: `/results/metrics_summary.md`, `/results/tables/`, `/results/figures/`,
+  and `/results/latest/replication_check.md` (SHA-256 determinism check; expect **PASS**)
 
 ## Upstream collection (documented, NOT run here)
 
