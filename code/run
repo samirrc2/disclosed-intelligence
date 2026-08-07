@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Code Ocean Reproducible Run entry point.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+exec bash code/scripts/reproduce.sh "$@"

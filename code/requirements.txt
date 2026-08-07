@@ -1,0 +1,9 @@
+# Analysis dependencies (offline reproduction; no API/network needed).
+# Pinned to a known-compatible set. numpy is pinned because the numpy 2.4.x /
+# pandas 3.0.x pairing has a known regression; 2.2.6 + 2.2.3 is the tested pair.
+numpy==2.2.6
+pandas==2.2.3
+scipy>=1.11,<1.16
+statsmodels>=0.14,<0.15
+matplotlib>=3.7,<4
+pytest>=8.0

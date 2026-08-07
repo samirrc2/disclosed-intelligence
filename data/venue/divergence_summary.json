@@ -1,0 +1,18 @@
+{
+ "n_firms_both_venues": 283,
+ "brochure_exposure_share": 0.0071,
+ "marketing_exposure_share": 0.0071,
+ "exposure_gap_mean": 0.0,
+ "exposure_gap_CI95": [
+  -0.0141,
+  0.0141
+ ],
+ "ci_excludes_zero": false,
+ "exposure_2x2": {
+  "both": 0,
+  "marketing_only": 2,
+  "brochure_only": 2,
+  "neither": 279
+ },
+ "venue_divergence_rate": 0.0141
+}

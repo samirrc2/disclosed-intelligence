@@ -1,0 +1,25 @@
+# Model manifest
+
+Classification is tooling; the object of study is the industry. Models were used
+only to apply the frozen rubric to brochure text.
+
+| Role | Provider | Model | Temperature | Used for |
+|---|---|---|---|---|
+| Primary classifier | OpenAI | `gpt-4o` (fixed snapshot) | 0 | `labels_primary.csv` (all 388 brochures) |
+| Same-family second rater | OpenAI | `gpt-4o-mini` | 0 | `labels_secondary_sub.csv` (random 60) — reproducibility |
+| Independent cross-family rater | Anthropic | Claude (different family) | n/a | `labels_independent.csv` (180) — validation reference |
+
+Notes:
+
+- The primary and same-family raters used the OpenAI Chat Completions API at
+  temperature 0 with the rubric in `data/prompts/typology_v1.md` and a strict JSON
+  output contract (a verbatim supporting quote required for every positive label).
+- The independent rater is from a **different developer and family** than the
+  primary classifier and had no access to the primary labels; this makes the
+  validation a cross-family, cross-instrument check (stronger than the same-family
+  reproducibility check, but still between two language models rather than a panel
+  of human domain experts — see `paper/P10A_S2_validation.pdf`).
+- Total metered classification spend was under **US $2** (per the study cost ledger).
+- Because model APIs are non-deterministic and change over time, the classification
+  step is **not** part of the Reproducible Run; its outputs are frozen in `data/`.
+  The analysis that this capsule runs is fully deterministic and model-free.
