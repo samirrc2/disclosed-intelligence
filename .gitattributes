@@ -1,0 +1,7 @@
+# Normalize line endings; treat data/binary assets as binary.
+* text=auto
+*.csv text
+*.png binary
+*.pdf binary
+*.eps binary
+*.zip binary

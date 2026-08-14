@@ -41,7 +41,7 @@ those results, and the Frontiers manuscript package.
 |-------|-------|
 | **Article title** | Disclosed Intelligence: A Large-Sample Measurement of AI Disclosure in U.S. Investment Adviser Fiduciary Filings |
 | **Authors** | Samir Chincholikar, Robin Chawla |
-| **Affiliations** | Independent Researcher, New York, NY, United States; Independent Researcher, India |
+| **Affiliations** | Independent Researcher, New York, NY, United States; Independent Researcher, New York, NY, United States |
 | **Code repository** | https://github.com/samirrc2/disclosed-intelligence |
 | **Persistent DOI** | https://doi.org/10.24433/CO.3404788.v1 (`10.24433/CO.3404788.v1`) |
 | **Contact** | Samir Chincholikar: samir.chincholikar@gmail.com; Robin Chawla: robin.chawla.cse14@iitbhu.ac.in |

@@ -10,7 +10,7 @@ Every requirement from the Frontiers author guidelines + the official LaTeX temp
 | 3 | Title: concise, states main result, no abbreviations, includes keywords | ✅ | Title names the finding ("Disclosed Intelligence … AI Disclosure"), no abbreviations |
 | 4 | Running title | ✅ | `\title[Disclosed Intelligence]{…}` |
 | 5 | Author names listed; corresponding author marked `*` | ✅ | `Samir Chincholikar$^{1}$, Robin Chawla$^{2,*}$` |
-| 6 | Affiliation format: Dept, Org, City, State (US/CA/AU), Country — no street/zip | ✅ | $^{1}$Independent Researcher, New York, NY, United States; $^{2}$Independent Researcher, India — **confirm/adjust if needed** |
+| 6 | Affiliation format: Dept, Org, City, State (US/CA/AU), Country — no street/zip | ✅ | $^{1}$Independent Researcher, New York, NY, United States; $^{2}$Independent Researcher, New York, NY, United States — **confirm/adjust if needed** |
 | 7 | Corresponding email in correspondence block | ✅ | robin.chawla.cse14@iitbhu.ac.in |
 | 8 | Abstract: one paragraph, IMRAD-style, **no citations/figures/tables** | ✅ | Single paragraph; zero citations; policy names mentioned without author-date cites |
 | 9 | Abstract SEO: keywords in first two sentences | ✅ | "artificial intelligence", "investment advisers", "fiduciary disclosures" up front |
@@ -44,7 +44,7 @@ Every requirement from the Frontiers author guidelines + the official LaTeX temp
 | 37 | Registration of submitting author on Frontiers | ⚠️ | Portal step (yours) |
 
 ## Items requiring your input before submission (3)
-1. **Affiliation** — the block reads "Independent Researcher, New York, NY, United States" / "Independent Researcher, India" (matching your Paper 13 submission); confirm or adjust to your preferred wording.
+1. **Affiliation** — the block reads "Independent Researcher, New York, NY, United States" for both authors (matching your Paper 13 submission); confirm or adjust to your preferred wording.
 2. **Zenodo + Code Ocean DOIs** — insert into the Data Availability Statement (and `CITATION.cff`, `.zenodo.json`) once you mint the release; the GitHub link is already in place.
 3. **Portal steps** — per-figure alt text, corresponding-author registration, and (if requested) the words/figures/tables count field.
 

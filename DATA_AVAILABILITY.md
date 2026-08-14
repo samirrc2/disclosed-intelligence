@@ -4,18 +4,14 @@
 materials in a repository, then cite and link them from the article.)*
 
 All code and frozen data required to reproduce every number, table, and figure in
-this article are openly available on GitHub, archived on Zenodo, and packaged as an
-executable Code Ocean capsule:
+this article are openly available as an executable, deterministic Code Ocean capsule and in the
+source repository:
 
 - **Source repository:** https://github.com/samirrc2/disclosed-intelligence
-- **Executable capsule (Code Ocean):** https://doi.org/10.24433/CO.\<ID\>  *(insert minted DOI on release)*
-- **Archive (Zenodo):** https://doi.org/10.5281/zenodo.\<ID\>  *(insert minted DOI on release)*
+- **Executable capsule (Code Ocean):** https://doi.org/10.24433/CO.3404788.v1
 
-> Chincholikar, S. & Chawla, R. (2026). *Disclosed Intelligence — reproducibility
-> artifact* [data set + software]. Zenodo. https://doi.org/10.5281/zenodo.\<ID\>
-
-Insert the minted Zenodo and Code Ocean DOIs here, in `CITATION.cff`, `.zenodo.json`,
-and the manuscript's Data Availability statement / reference list.
+The Code Ocean capsule (DOI above) is the archived, executable version of record; the
+source repository is made public upon acceptance.
 
 ## The deposit contains
 

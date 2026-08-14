@@ -1,0 +1,16 @@
+# Exact environment that produced the committed results (offline analysis path).
+# Matches the audited Code Ocean capsule and environment/Dockerfile. Reproduces
+# every reported statistic offline; no API keys or network are required.
+python==3.12.8
+numpy==2.2.6
+pandas==2.2.3
+scipy==1.14.1
+statsmodels==0.14.4
+matplotlib==3.9.2     # figures only
+pytest==8.3.3         # verifier tests
+
+# Data-gathering path only (NOT needed to reproduce results from the frozen data):
+# requests>=2.31          # SEC/IAPD retrieval
+# pdfplumber>=0.11        # brochure text extraction
+# trafilatura>=1.8        # marketing-site text extraction
+# openai>=1.30            # classification passes

@@ -35,3 +35,10 @@ _verify*.tgz
 /marketing/__pycache__/
 /analysis/out/
 /build/out/
+
+# Packaged/scratch archives at the repo root (the capsule ships UNPACKED under capsule/).
+# Root-anchored so genuine supplementary archives (frontiers/supplements/*.zip) still ship.
+/*.tgz
+/*.zip
+_*.tgz
+_*.zip

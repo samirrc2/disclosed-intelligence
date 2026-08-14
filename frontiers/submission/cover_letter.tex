@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}\setlength{\parskip}{3pt}\pagestyle{empty}
+\begin{document}
+
+To the Editors\\
+\emph{Frontiers in Artificial Intelligence} --- AI in Finance
+
+\vspace{4pt}
+\textbf{Re: Original Research submission --- ``Disclosed Intelligence: A Large-Sample Measurement of AI Disclosure in U.S. Investment Adviser Fiduciary Filings.''}
+
+\vspace{6pt}
+Dear Editors,
+
+We submit the above manuscript for consideration as an Original Research article in the AI in Finance specialty section of \emph{Frontiers in Artificial Intelligence}.
+
+\textbf{Fit.} The paper measures how U.S. investment advisers describe artificial intelligence in the Form ADV Part 2A brochure---the document that carries their fiduciary and anti-fraud obligations---connecting the AI-governance and capital-market-disclosure literatures the journal actively publishes, alongside recent Frontiers in AI work on AI adoption and corporate outcomes. It also contributes to a methodological theme of direct interest to the journal: validating large language models as measurement instruments for high-stakes text.
+
+\textbf{Contribution.} To our knowledge this is the first large-sample, classifier-based, and independently validated measurement of AI disclosure in adviser fiduciary filings. From the SEC Form ADV Part 1 universe (16{,}223 advisers) we draw a stratified random sample of 400 firms and classify 388 current brochures with a prespecified five-label typology. Disclosed any-use of AI is 23.7\% (95\% CI 19.7--28.2), rises steeply with adviser size and is higher for private-fund advisers, and is dominated by risk-framing (27.6\%) rather than claims of use. A survey-weighted estimate (22.7\%) confirms robustness to the design, and disclosed use diverges widely from the $\sim$63\% surveyed-adoption benchmark---a divergence we interpret as a benchmark comparison between differently defined measures, not a nondisclosure rate.
+
+\textbf{Rigor and reproducibility.} The five-label instrument was frozen before analysis. Reliability is established at two levels: same-family reproducibility and, more demanding, an independent blinded re-coding of 180 brochures by a different model family, with metrics design-weighted (Horvitz--Thompson) to the population from a two-phase verification sample (any-use $\kappa = 0.74$, recall 0.84, precision 0.76; risk-factor $\kappa = 0.93$). Inference uses Wilson intervals, linear-by-linear trend tests, a firm-level logistic regression, and design-based survey weighting. Every reported number, table, and figure regenerates deterministically---no vendor API calls, no network, no keys---from a public repository, a Zenodo archive, and an executable Code Ocean capsule.
+
+\textbf{Scope and ethics.} An enforcement-anchored screen for AI-washing exposure language distilled from the two SEC orders (Delphia; Global Predictions) finds such language rare in brochures (1.3\%), and on adjudication none is an unsubstantiated promotional claim of the charged type; a matched brochure-versus-marketing comparison shows the fiduciary brochure is, if anything, the more AI-forward venue. The study reports aggregate rates and measures disclosure behavior, not legal compliance; it makes no claim that any named adviser breached a disclosure obligation. It uses only public data (SEC Form ADV and IAPD) and involved no human or animal subjects. Firm identifiers in the released dataset are pseudonymized. Use of AI assistance is disclosed in the Methods and in a dedicated Generative AI statement.
+
+The manuscript is original, not under consideration elsewhere, and all authors approve its submission. We have no competing interests to declare.
+
+\vspace{6pt}
+Sincerely,
+
+Robin Chawla (corresponding author) --- \href{mailto:robin.chawla.cse14@iitbhu.ac.in}{robin.chawla.cse14@iitbhu.ac.in}\\
+on behalf of Samir Chincholikar and Robin Chawla
+
+\end{document}
