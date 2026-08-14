@@ -1,12 +1,37 @@
-# Generated outputs
-results/
-!results/.gitkeep
-
 # Python
 __pycache__/
 *.pyc
 .venv/
-.pytest_cache/
+venv/
 
-# OS
+# OS / editor cruft
 .DS_Store
+*.swp
+
+# Git lock/temp leftovers (networked mounts have hit lock issues)
+*.lock
+.git/**/tmp_obj_*
+
+# Secrets / keys (never commit)
+API Keys/
+*.key
+.env
+
+# Local scratch / superseded material
+_to_delete/
+_verify*.tgz
+
+# -------------------------------------------------------------------------
+# IDENTIFIED WORKING DATA — do NOT publish. Leading slash = TOP LEVEL ONLY,
+# so the pseudonymized release under capsule/data/ is NOT affected.
+# The live pipeline (build/ marketing/ analysis/) works over real SEC filings
+# keyed by CRD; the public, reproducible dataset is capsule/data/ ONLY.
+# -------------------------------------------------------------------------
+/data/
+/pilot/
+/recon/
+/marketing/data/
+/marketing/out/
+/marketing/__pycache__/
+/analysis/out/
+/build/out/

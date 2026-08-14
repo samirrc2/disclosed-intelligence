@@ -263,12 +263,32 @@ def exposure_and_missingness(m, d, out):
     return exp, miss
 
 
-def figures(m, t4, t5, out):
+def figures(m, t1, t4, t5, out):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    # Figure 1 — any-use gradient by stratum
+    # Figure 1 — typology label prevalence with Wilson 95% CIs
+    tl = t1[t1.label.str.match(r"^\([a-e]\)")].copy()
+    tlabels = tl.label.tolist()
+    tprev = [p * 100 for p in tl.prevalence.tolist()]
+    tlo = [max(0.0, pv - lo * 100) for pv, lo in zip(tprev, tl.ci_lo.tolist())]
+    thi = [max(0.0, hi * 100 - pv) for pv, hi in zip(tprev, tl.ci_hi.tolist())]
+    fig, ax = plt.subplots(figsize=(6.4, 3.6))
+    yp = list(range(len(tlabels)))
+    ax.barh(yp, tprev, color="#2b6cb0",
+            xerr=[tlo, thi], error_kw=dict(ecolor="#1a365d", capsize=3, lw=1))
+    ax.set_yticks(yp)
+    ax.set_yticklabels(tlabels, fontsize=8)
+    ax.set_xlabel("Prevalence among 388 classified brochures (%)")
+    ax.set_title("Typology label prevalence (Wilson 95% CIs)")
+    ax.invert_yaxis()
+    fig.tight_layout()
+    for ext in ("png", "svg"):
+        fig.savefig(out / "figures" / f"fig1_typology.{ext}", dpi=150)
+    plt.close(fig)
+
+    # Figure 2 — any-use gradient by stratum
     fig, ax = plt.subplots(figsize=(6.2, 3.6))
     width = 0.38
     xs = range(4)
@@ -284,10 +304,10 @@ def figures(m, t4, t5, out):
     ax.legend(frameon=False)
     fig.tight_layout()
     for ext in ("png", "svg"):
-        fig.savefig(out / "figures" / f"fig1_gradient.{ext}", dpi=150)
+        fig.savefig(out / "figures" / f"fig2_gradient.{ext}", dpi=150)
     plt.close(fig)
 
-    # Figure 2 — validation kappa per label + any-use
+    # Figure 3 — validation kappa per label + any-use
     fig, ax = plt.subplots(figsize=(6.2, 3.6))
     labs = t4.label.tolist()
     ks = t4.kappa.tolist()
@@ -300,10 +320,10 @@ def figures(m, t4, t5, out):
     ax.invert_yaxis()
     fig.tight_layout()
     for ext in ("png", "svg"):
-        fig.savefig(out / "figures" / f"fig2_validation.{ext}", dpi=150)
+        fig.savefig(out / "figures" / f"fig3_validation.{ext}", dpi=150)
     plt.close(fig)
 
-    # Figure 3 — venue comparison
+    # Figure 4 — venue comparison
     fig, ax = plt.subplots(figsize=(4.6, 3.6))
     ax.bar(["Brochure", "Marketing"],
            [t5["brochure_anyuse"] * 100, t5["marketing_anyuse"] * 100],
@@ -312,7 +332,7 @@ def figures(m, t4, t5, out):
     ax.set_title("Disclosure by venue (n=%d matched)" % t5["n_firms_both_venues"])
     fig.tight_layout()
     for ext in ("png", "svg"):
-        fig.savefig(out / "figures" / f"fig3_venue.{ext}", dpi=150)
+        fig.savefig(out / "figures" / f"fig4_venue.{ext}", dpi=150)
     plt.close(fig)
 
 
@@ -365,9 +385,10 @@ def write_summary(out, t1, t2res, t3res, t4, t4b, nval, t5, exp, miss):
     L.append("| tables/table5_venue.csv, table5_venue.json | Table 5 (venue comparison) |")
     L.append("| tables/exposure_summary.json | Section 4.5 exposure screen |")
     L.append("| tables/missingness.json | Marketing-corpus selection analysis |")
-    L.append("| figures/fig1_gradient.* | Disclosed use by type and size |")
-    L.append("| figures/fig2_validation.* | Validation κ by label |")
-    L.append("| figures/fig3_venue.* | Disclosure by venue |")
+    L.append("| figures/fig1_typology.* | Figure 1 (typology label prevalence, Wilson CIs) |")
+    L.append("| figures/fig2_gradient.* | Figure 2 (disclosed use by type and size) |")
+    L.append("| figures/fig3_validation.* | Figure 3 (validation κ by label) |")
+    L.append("| figures/fig4_venue.* | Figure 4 (disclosure by venue) |")
     (out / "metrics_summary.md").write_text("\n".join(L) + "\n")
 
 
@@ -381,7 +402,7 @@ def main():
     t4, t4b, nval, _ = t4_validation(d, out)
     t5 = t5_venue(d, out)
     exp, miss = exposure_and_missingness(m, d, out)
-    figures(m, t4, t5, out)
+    figures(m, t1, t4, t5, out)
     write_summary(out, t1, t2res, t3res, t4, t4b, nval, t5, exp, miss)
     print(f"[analyze] wrote outputs to: {out}")
     print(f"[analyze] classified n={len(m)}; any-use={m.any_use.mean()*100:.1f}%; "

@@ -1,0 +1,20 @@
+# Disclosed Intelligence — dependencies. Python 3.10+.
+#   pip install -r requirements.txt
+#
+# Core — analysis + offline reproduction (also see capsule/code/requirements.txt
+# for the exact pinned versions used inside the Code Ocean capsule):
+pandas>=2.0
+numpy>=1.26
+scipy>=1.11
+statsmodels>=0.14
+matplotlib>=3.8
+
+# Live capture only — the SEC/IAPD pulls and the LLM classifier passes.
+# NOT needed to reproduce any published number (that path is keys-free; see capsule/).
+requests>=2.31
+pdfplumber>=0.11
+trafilatura>=1.8
+beautifulsoup4>=4.12
+openai>=1.30
+google-generativeai>=0.7
+tqdm>=4.66
